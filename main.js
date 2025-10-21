@@ -128,23 +128,68 @@ async function getNewEpisodes(){
         console.log(data)
         let card =""
         for(let x = 0 ; x < data.data.length ; x++){
+                const desc = data.data[x].synopsis != null
+                        
+                const shortEnough = data.data[x].title.length <70
+                
                 card += `
                  <div class="fcard">
-            <div class="img-box"><img src="${data.data[x].images.jpg.large_image_url}" alt="..." class="fav-anime-img"></div>
+            <div class="img-box"><img src="${data.data[x].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
+            <i class="fa-solid fa-heart"></i>
+            </div>
             <div class="text-container">
                 
                 <h2>${data.data[x].title}</h2>
-                <p>${data.data[x].synopsis}</p>
+                ${desc? `<p>${data.data[x].synopsis}</p>` :'No description'}
                 </div>
+                <div class="pop-up">
+               <div id="text">
+                 ${shortEnough ? `<p>${data.data[x].title}</p>` : ''}
+                ${desc? `<p>${data.data[x].synopsis}</p>` :'No description'}
+                <p>${data.data[x].status}</p>
+                <p>Episode day: ${data.data[x].broadcast.day}</p>
+                
+                <p>Genres: ${data.data[x].genres[0].name}</p>
+                </div>
+                <button id="watchbtn">Watch Now!</button>
+                </div>
+                
+
+               
             </div>`
                 
-                /* epImg[x].src = data.data[x].images.jpg.large_image_url
-                epTitle[x].innerHTML = data.data[x].title
-                epNum[x].innerHTML = data.data[x].episodes */
+               
         }
         document.querySelector('.anime-episodes').innerHTML = card
+        showDetails()
 }
-getNewEpisodes()
+getNewEpisodes().then(() =>{
+        let hearts = document.querySelectorAll('.fcard .img-box i')
+        console.log(hearts)
+        
+window.onload = function(){
+        if(localStorage.x != null){
+                for(let x = 0; x < tmp.length; x++) {
+                        hearts[tmp[x]].classList.add('red')
+                        
+                }
+        }
+}
+for (let x = 0; x < hearts.length; x++) {
+        hearts[x].addEventListener('click' , function(){
+                hearts[x].classList.toggle('red')
+                
+       
+                if(hearts[x].classList.contains('red')){
+                        tmp.push(x)
+                        localStorage.setItem('x' , JSON.stringify(tmp)) 
+                }else{
+                        tmp.splice(x,1)
+                        localStorage.setItem('x' , JSON.stringify(tmp)) 
+                }
+        })  
+}
+})
 console.log(epTitle)
 
 searchIcon.addEventListener('click' , function(){
@@ -155,7 +200,7 @@ searchIcon.addEventListener('click' , function(){
                 behavior : 'smooth'
         })
 })
-console.log(cards)
+
 
 /* const search = () =>{
  
@@ -210,11 +255,10 @@ let favAnCon = document.querySelector('.fav-animes')
 let favAnText = document.querySelector('.text-container')
 let favAnTitle = document.querySelector('.text-container h2')
 let favAnDesc = document.querySelector('.text-container p')
-let hearts = document.querySelectorAll('.img-con i')
-let fcard = document.querySelectorAll('.fcard')
+
 let favAnimes;
 let on;
-console.log(fcard)
+
 
 
 let tmp ;
@@ -226,29 +270,20 @@ else{
 }
 
 
-window.onload = function(){
-        if(localStorage.x != null){
-                for(let x = 0; x < tmp.length; x++) {
-                        hearts[tmp[x]].classList.add('red')
-                        
-                }
-        }
+
+
+var showDetails = () =>{
+        const popUps = document.querySelectorAll('.pop-up')
+        const carts = document.querySelectorAll('.anime-episodes .fcard .text-container')
+        console.log(popUps)
+        for(let x = 0; x < carts.length; x++) {
+                carts[x].addEventListener('click' , function(){
+                        popUps[x].classList.toggle('show')
+                })
+
 }
-for (let x = 0; x < hearts.length; x++) {
-        hearts[x].addEventListener('click' , function(){
-                hearts[x].classList.toggle('red')
-                
-       
-                if(hearts[x].classList.contains('red')){
-                        tmp.push(x)
-                        localStorage.setItem('x' , JSON.stringify(tmp)) 
-                }else{
-                        tmp.splice(x,1)
-                        localStorage.setItem('x' , JSON.stringify(tmp)) 
-                }
-               
-        })  
+
 }
-console.log(tmp)
+
 
 //add to favorite

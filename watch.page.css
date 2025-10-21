@@ -1,0 +1,125 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: white;
+
+}
+@font-face {
+    font-family: 'neo';
+    src: url(NeoSansArabicBold.woff);
+}
+:root {
+  --black: #000000;
+  --orange: #FF6B00;
+  --violet: #9D4EDD;
+  --text: #EAEAEA;
+  --gray: #1C1C1C;
+}
+body{
+    height: 100vh;
+    background-color: #000000;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.container{
+    height: 100%;
+    width: 100%;
+    background-color: var(--black);
+    overflow-x: hidden;
+}
+button {
+  background: var(--orange);
+  color: var(--black);
+  box-shadow: 0 0 15px var(--orange);
+  border: 1px solid black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover{
+    transform: scale(1.1);
+    background: linear-gradient(135deg , var(--violet) , var(--orange));
+    box-shadow: 0 0 15px var(--violet);
+}
+/*NAVBAR*/
+nav{
+    font-family: 'Orbitron';
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: var(--black);
+    text-transform: capitalize;
+    align-items: flex-start;
+}
+nav ul li{
+    list-style: none;
+}
+nav ul li a{
+    
+    color: var(--violet);
+    border-bottom: transparent 2px solid; 
+    transition: 0.3s;
+}
+nav ul{
+    display: flex;
+    gap: 70px;
+    margin-right: 100px;
+    align-items: flex-start;  
+
+    position: relative;
+}
+nav ul a:hover{
+    border-bottom: var(--violet) 2px solid; 
+}
+nav ul li :last-child{
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+}
+nav ul img{
+cursor: pointer;
+
+}
+.episode-title{
+    background-color: #fff;
+    height: 70px;
+    background-color: var(--violet);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'neo';
+}
+.content{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    transform: translateY(50px);
+    display: flex;
+
+}
+.servers{
+    height: 50px;
+    background-color: blue;
+}
+.watch{
+    background: red;
+    width: 70%;
+    height: 100%;
+}
+.eps{
+    background-color: yellow;
+    width: 30%;
+    height: 100%;
+}
+.eps div{
+    height: 50px;
+    background-color: #fff;
+}
+.watch .video{
+    height: 90%;
+}
