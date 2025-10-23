@@ -9,6 +9,7 @@ let imgs = document.querySelectorAll('.popular-anime-img')
 let textContainer = document.querySelectorAll('.text-container')
 const searchIcon = document.querySelector('#search-icon')
 const SearchContainer = document.querySelector('#searchbar-container')
+let III = document.createElement('i')
 const searchBar = document.getElementById('searchbar')
 console.log(SearchContainer)
 
@@ -121,6 +122,15 @@ let epImg = document.querySelectorAll('.img-con img')
 let epNum = document.querySelectorAll('.img-con h3')
 let epTitle = document.querySelectorAll('.text-con h3')
 
+
+let tmp ;
+if(localStorage.x != null){
+        tmp = JSON.parse(localStorage.x)
+}
+else{
+        tmp = []
+}
+
 async function getNewEpisodes(){
         const url = 'https://api.jikan.moe/v4/seasons/now'
         const res  = await fetch(url)
@@ -166,17 +176,17 @@ async function getNewEpisodes(){
 getNewEpisodes().then(() =>{
         let hearts = document.querySelectorAll('.fcard .img-box i')
         console.log(hearts)
-        
-window.onload = function(){
+
         if(localStorage.x != null){
+      
                 for(let x = 0; x < tmp.length; x++) {
-                        hearts[tmp[x]].classList.add('red')
-                        
+                        hearts[tmp[x]].classList.add('red')     
                 }
         }
-}
+
 for (let x = 0; x < hearts.length; x++) {
-        hearts[x].addEventListener('click' , function(){
+        hearts[x].addEventListener('click' , function(e){
+                e.stopPropagation()
                 hearts[x].classList.toggle('red')
                 
        
@@ -261,26 +271,24 @@ let on;
 
 
 
-let tmp ;
-if(localStorage.x != null){
-        tmp = JSON.parse(localStorage.x)
-}
-else{
-        tmp = []
-}
+
+                                                                                                //problem eli el hearts is not defined
+
+
+
+
 
 
 
 
 var showDetails = () =>{
         const popUps = document.querySelectorAll('.pop-up')
-        const carts = document.querySelectorAll('.anime-episodes .fcard .text-container')
+        const carts = document.querySelectorAll('.anime-episodes .fcard')
         console.log(popUps)
         for(let x = 0; x < carts.length; x++) {
                 carts[x].addEventListener('click' , function(){
                         popUps[x].classList.toggle('show')
                 })
-
 }
 
 }
