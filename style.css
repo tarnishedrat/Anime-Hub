@@ -197,6 +197,8 @@ cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 10px;
+    color: white;
+    text-shadow: none;
 }
 .fcard{
     cursor: pointer;
