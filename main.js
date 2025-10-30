@@ -1,6 +1,8 @@
 let cards = document.querySelectorAll('.card')
-let imgBox = document.getElementById('img-box')
-let img = document.querySelectorAll('.img-box #show')
+const heroSec = document.querySelector('.hero-section')
+let heroSecH1 = document.querySelector('.hero-section .input h1')
+let imgBox = document.querySelector('.hero-section .img-box')
+let img = document.querySelectorAll('.hero-section .img-box img')
 let title = document.querySelectorAll('.card h2')
 let cardP = document.querySelectorAll('.card p')
 let right = document.querySelector('.img-box #right')
@@ -11,50 +13,128 @@ const searchIcon = document.querySelector('#search-icon')
 const SearchContainer = document.querySelector('#searchbar-container')
 let III = document.createElement('i')
 const searchBar = document.getElementById('searchbar')
-console.log(SearchContainer)
+
+console.log(heroSecH1)
 
 
-async function getAnimeDATA(){
-        const response = await fetch()
+async function getOnePieceBanners(displayImage) {
+  const query = `
+    query {
+      Page(perPage: 10) {
+        media(search: "One Piece", type: ANIME) {
+          title { romaji }
+          bannerImage
+          coverImage { large }
+        }
+      }
+    }
+  `;
+
+  const res = await fetch("https://graphql.anilist.co", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({ query })
+  });
+
+  const data = await res.json();
+  console.log(data);
+
+  const banners = data.data.Page.media
+    .map(m => m.bannerImage)
+    .filter(Boolean); // remove nulls
+
+  console.log("Banners:", banners);
+  banners.splice(1 , 1)
+  displayImage(banners)
 }
 
+getOnePieceBanners(displayImage);
 
-let i = 1
-function plus(){
-        if(i === 4){
-                i = 1
-                img[0].src = `imgs/img${i}.jpg`
-                console.log(i)
-        } 
-        else{
-                 i++
-                img[0].src = `imgs/img${i}.jpg`
-                console.log(i)
+function displayImage(banners){
+        for(let x = 1  ; x <5 ; x++){
+                
+              img[x].src = banners[x-1]
         }
 }
-function moin(){
-        if(i === 1 ){
-                i = 4
-                img[0].src = `imgs/img${i}.jpg`
-                console.log('if' +i)
+//setinterval
+let x = 0
+const flipImages = setInterval(() =>{
+        if(x === 4){
+                img[4].style.display ='none';
+                x = 0
+                img[x].style.display ='block';
         }
         else{
-                i--
-                img[0].src = `imgs/img${i}.jpg`
-                console.log('else' +i)
+                img[x].style.display ='none';
+                x++;
+                img[x].style.display ='block';   
         }
-}
-let count = 0
-setInterval(() =>{
-        if(count === 4){
-                count = 1
-                img[0].src = `imgs/img${count}.jpg`
+        if(x === 2 ){
+                right.style.color ='#000000';
+                left.style.color ='#000000';
+                heroSecH1.style.color ='black'
         }
         else{
-                count++
-                img[0].src = `imgs/img${count}.jpg`
+                right.style.color ='#fff';
+                left.style.color ='#fff'; 
+                heroSecH1.style.color ='#fff'
         }
 }, 3000)
+
+
+
+
+right.addEventListener('click' , function(){
+        clearInterval(flipImages)
+        if(x === 4){
+                img[4].style.display ='none';
+                x = 0
+                img[x].style.display ='block';
+        }
+        else{
+                img[x].style.display ='none';
+                x++;
+                img[x].style.display ='block';   
+        }
+        if(x === 2 ){
+                right.style.color ='black';
+                left.style.color ='black';
+                heroSecH1.style.color ='black'
+        }
+        else{
+                right.style.color ='#fff';
+                left.style.color ='#fff'; 
+                heroSecH1.style.color ='#fff'
+        }
+        console.log(x)
+})
+left.addEventListener('click' , function(){
+        if(x === 0){
+                img[0].style.display ='none';
+                x = 4
+                img[x].style.display ='block';
+        }
+        else{
+             img[x].style.display ='none';
+                 x--;
+                img[x].style.display ='block';   
+        }
+        if(x === 2 ){
+                right.style.color ='black';
+                left.style.color ='black';
+                heroSecH1.style.color ='black'
+        }
+        else{   
+                right.style.color ='#fff';
+                left.style.color ='#fff'; 
+                heroSecH1.style.color ='#fff'
+        }
+
+})
+
 
 async function getPopularAnime(){
         const res = await fetch("https://api.jikan.moe/v4/seasons/now?limit=5")
@@ -135,7 +215,6 @@ async function getNewEpisodes(){
         const url = 'https://api.jikan.moe/v4/seasons/now'
         const res  = await fetch(url)
         const data = await res.json()
-        console.log(data)
         let card =""
         for(let x = 0 ; x < data.data.length ; x++){
                 const desc = data.data[x].synopsis != null
@@ -180,7 +259,8 @@ getNewEpisodes().then(() =>{
         if(localStorage.x != null){
       
                 for(let x = 0; x < tmp.length; x++) {
-                        hearts[tmp[x]].classList.add('red')     
+                        hearts[tmp[x]].classList.add('red')  
+                        console.log(hearts[tmp[x]])
                 }
         }
 
@@ -188,20 +268,22 @@ for (let x = 0; x < hearts.length; x++) {
         hearts[x].addEventListener('click' , function(e){
                 e.stopPropagation()
                 hearts[x].classList.toggle('red')
-                
-       
+
                 if(hearts[x].classList.contains('red')){
                         tmp.push(x)
                         localStorage.setItem('x' , JSON.stringify(tmp)) 
                 }else{
-                        tmp.splice(x,1)
+                        const INDEXOF = tmp.indexOf(x) 
+                        tmp.splice(INDEXOF , 1)
                         localStorage.setItem('x' , JSON.stringify(tmp)) 
+                        
                 }
+                console.log(tmp)
         })  
 }
 })
-console.log(epTitle)
-
+/* localStorage.removeItem('x') */
+console.log(tmp.length)
 searchIcon.addEventListener('click' , function(){
         SearchContainer.style.display = 'flex'
         searchBar.focus()
@@ -290,7 +372,6 @@ var showDetails = () =>{
                         popUps[x].classList.toggle('show')
                 })
 }
-
 }
 
 
