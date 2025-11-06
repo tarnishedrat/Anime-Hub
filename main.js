@@ -261,7 +261,7 @@ async function getNewEpisodes(){
             <div class="text-container">
                 
                 <h2>${data.data[x].title}</h2>
-                ${desc? `<p class ='synopsis'>${data.data[x].synopsis}</p>` :`<p style="color: var(--text);">No description</p>`}
+                
                 </div>
                 <div class="pop-up">
                <div id="text">
