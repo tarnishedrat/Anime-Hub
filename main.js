@@ -8,13 +8,33 @@ let cardP = document.querySelectorAll('.card p')
 let right = document.querySelector('.img-box #right')
 let left = document.querySelector('.img-box #left')
 let imgs = document.querySelectorAll('.popular-anime-img')
+let nav = document.querySelector('nav')
 let textContainer = document.querySelectorAll('.text-container')
 const searchIcon = document.querySelector('#search-icon')
 const SearchContainer = document.querySelector('#searchbar-container')
 let III = document.createElement('i')
 const searchBar = document.getElementById('searchbar')
+searchIcon.addEventListener('click' , function(){
+        
+        SearchContainer.style.display = 'flex'
+        searchBar.focus()
+        /* nav.style.position ='fixed'
+        nav.style.width ="100%" */
+        nav.style.zIndex ="10000"
+        window.scroll({
+                top: 793,
+                behavior: 'smooth'
+                });
+                searchBar.addEventListener('blur' , function(){
+                        SearchContainer.style.display ="none"
+                })
+       
+})
+
+
 
 console.log(heroSecH1)
+console.log(document.body.scrollHeight);
 
 
 async function getOnePieceBanners(displayImage) {
@@ -149,30 +169,41 @@ async function getPopularAnime(){
                         let t2 = document.createElement('h2')
                         
                         text.textContent = cardP[x].innerHTML
+                        text.style.color ='var(--text)'
                         t2.textContent = title[x].innerHTML
-                        t2.style.whiteSpace = 'wrap'
+                        t2.style.whiteSpace ='wrap'
+                        t2.style.textOverflow ='normal'
                         
                         let div = document.createElement('div')
                         div.style.width = '360px'
-                        div.style.height = 'fit-content'
+                        
+                        
+                        div.style.display ='flex'
+                        div.style.flexDirection ='column'
+                        div.style.alignItems ='center'
+                        div.style.justifyContent ='center'
                         div.style.position ='absolute'
                         div.style.bottom = '20px'
                         div.style.opacity = '0'
                         div.style.pointerEvents = 'none'
                         div.style.left = '50%'
+                        div.style.padding ='10px'
                         div.style.transform = 'translateX(-50%)'
-                        div.style.zIndex ='9999'
-                        div.style.padding= '10px'
+                        
+                       
                         div.appendChild(t2)
                         div.appendChild(text)
                         cards[x].addEventListener('mouseenter' , () =>{
                                 div.style.opacity = '1'
                                 div.style.pointerEvents = 'auto'
-                                div.style.backgroundColor = '#333'
+                                div.style.backgroundColor = 'var(--gray)'
                                 textContainer[x].style.filter = 'blur(10px)'
                                 imgs[x].style.transition = '.4s'
                                 imgs[x].style.cursor= 'pointer'
                                 imgs[x].style.opacity = '0.7'
+                                if(body.classList.contains('light-theme')){
+                                      imgs[x].style.opacity ="0.85"
+                                }
                                 
                         })
                         cards[x].addEventListener('mouseleave' , () =>{
@@ -200,7 +231,7 @@ getPopularAnime()
 let animeCard = document.querySelectorAll('.anime-card')
 let epImg = document.querySelectorAll('.img-con img')
 let epNum = document.querySelectorAll('.img-con h3')
-let epTitle = document.querySelectorAll('.text-con h3')
+
 
 
 let tmp ;
@@ -211,6 +242,7 @@ else{
         tmp = []
 }
 
+
 async function getNewEpisodes(){
         const url = 'https://api.jikan.moe/v4/seasons/now'
         const res  = await fetch(url)
@@ -218,25 +250,25 @@ async function getNewEpisodes(){
         let card =""
         for(let x = 0 ; x < data.data.length ; x++){
                 const desc = data.data[x].synopsis != null
-                        
+                const lightTheme = document.body.classList.contains('light-theme')
                 const shortEnough = data.data[x].title.length <70
                 
                 card += `
                  <div class="fcard">
             <div class="img-box"><img src="${data.data[x].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
-            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-heart HS"></i>
             </div>
             <div class="text-container">
                 
                 <h2>${data.data[x].title}</h2>
-                ${desc? `<p>${data.data[x].synopsis}</p>` :'No description'}
+                ${desc? `<p class ='synopsis'>${data.data[x].synopsis}</p>` :`<p style="color: var(--text);">No description</p>`}
                 </div>
                 <div class="pop-up">
                <div id="text">
                  ${shortEnough ? `<p>${data.data[x].title}</p>` : ''}
-                ${desc? `<p>${data.data[x].synopsis}</p>` :'No description'}
+                ${desc?`<p > ${data.data[x].synopsis}</p>` :`<p style="color: var(--text);">No description</p>`}
                 <p>${data.data[x].status}</p>
-                <p>Episode day: ${data.data[x].broadcast.day}</p>
+                <p class='epday'>Episode day: ${data.data[x].broadcast.day}</p>
                 
                 <p>Genres: ${data.data[x].genres[0].name}</p>
                 </div>
@@ -253,16 +285,23 @@ async function getNewEpisodes(){
         showDetails()
 }
 getNewEpisodes().then(() =>{
-        let hearts = document.querySelectorAll('.fcard .img-box i')
-        console.log(hearts)
+       /*   */
+       
 
-        if(localStorage.x != null){
-      
-                for(let x = 0; x < tmp.length; x++) {
-                        hearts[tmp[x]].classList.add('red')  
-                        console.log(hearts[tmp[x]])
-                }
-        }
+let ftitle = document.querySelectorAll('.fcard .text-container h2')
+
+        let synopsis = document.querySelectorAll('.synopsis')
+        let imgs = document.querySelectorAll('.fav-anime-img')
+        let broadcast = document.querySelectorAll('.epday') 
+        console.log(synopsis)
+        const lightTheme = document.body.classList.contains('light-theme')
+
+        let hearts = document.querySelectorAll('.fcard .img-box i')
+
+
+
+                    
+                   /*
 
 for (let x = 0; x < hearts.length; x++) {
         hearts[x].addEventListener('click' , function(e){
@@ -281,17 +320,122 @@ for (let x = 0; x < hearts.length; x++) {
                 console.log(tmp)
         })  
 }
+
+ */
+
+             
+        
+          const search =()=>{
+                console.log(tmp)
+
+                 if(localStorage.x != null){
+                for(let x = 0; x < tmp.length; x++) {
+                        const INDEXOF = tmp[x]
+                
+
+
+                        hearts[INDEXOF].classList.add('red')  
+                        console.log(hearts[tmp[x]])
+                }
+        }
+        console.log(hearts)
+for (let x = 0; x < hearts.length; x++) {
+        hearts[x].addEventListener('click' , function(e){
+                e.stopPropagation()
+                hearts[x].classList.toggle('red')
+
+                if(hearts[x].classList.contains('red')){
+                        tmp.push(x)
+                        localStorage.setItem('x' , JSON.stringify(tmp)) 
+                }else{
+                        const INDEXOF = tmp.indexOf(x) 
+                        tmp.splice(INDEXOF , 1)
+                        localStorage.setItem('x' , JSON.stringify(tmp)) 
+                        
+                }
+                console.log(tmp)
+        })  
+}
+   
+
+
+
+                
+                let card =''
+                for (let x = 0; x < synopsis.length; x++){
+                        const desc = synopsis[x] != null
+                        let syno = synopsis[x].innerHTML
+                        
+                        const shortEnough = ftitle[x].length <70
+                if(ftitle[x].innerHTML.toLowerCase().includes(searchBar.value)){
+                        const eptit = ftitle[x].innerHTML
+                        const epim = imgs[x].src
+                        const brod = broadcast[x].innerHTML
+                       /*   */ 
+                        card += `
+                 <div class="fcard">
+            <div class="img-box"><img src="${epim}" alt="..." class="fav-anime-img">
+            <i class="fa-solid fa-heart HS"></i>
+            </div>
+            <div class="text-container">
+                
+                <h2>${eptit}</h2>
+                ${desc? `<p class="synopsis">${syno}</p>` :`<p style="color: var(--text);">No description</p>`}
+                </div>
+                
+                <div class="pop-up">
+               <div id="text">
+                 ${shortEnough ? `<p>${eptit}</p>` : ''}
+                ${desc?`<p > ${syno}</p>` :`<p style="color: var(--text);">No description</p>`}
+                
+
+                <p class='epday'>Episode day: ${brod}</p>
+                
+                
+                </div>
+                <button id="watchbtn">Watch Now!</button>
+                </div>
+
+               
+            </div>`
+                        
+            
+                      }  
+                      
+                }
+                
+               
+                document.querySelector('.anime-episodes').innerHTML = card
+               
+        }
+searchBar.addEventListener('keyup' ,search )
+
+
+
+}).then(()=>{
+    let hearts = document.querySelectorAll('.fcard .img-box .HS')
+
+
+
+                if(localStorage.x != null){
+                        for(let x = 0; x < tmp.length; x++){
+                                hearts[tmp[x]].classList.add('red')  
+                                console.log(hearts[tmp[x]])
+                        }
+                }
+        /*
+        console.log(hearts)
+   
+   */
+     
 })
-/* localStorage.removeItem('x') */
-console.log(tmp.length)
-searchIcon.addEventListener('click' , function(){
-        SearchContainer.style.display = 'flex'
-        searchBar.focus()
-        window.scrollTo({
-                top : 300 ,
-                behavior : 'smooth'
-        })
-})
+
+
+
+
+
+
+
 
 
 /* const search = () =>{
@@ -316,28 +460,7 @@ searchIcon.addEventListener('click' , function(){
 } */
 
 
-        const search =()=>{
-                let card =''
-                for (let x = 0; x < epTitle.length; x++) {
-                        if(epTitle[x].innerHTML.toLowerCase().includes(searchBar.value)){
-                        const eptit = epTitle[x].innerHTML
-                        const epim = epImg[x].src
-                        const epnumber = epNum[x].innerHTML
-
-                        card += ` <div class="anime-card">
-                <div class="img-con">
-                    <img src="${epim}" alt="...">
-                    <h3>${epnumber}</h3>
-                </div>
-                <div class="text-con">
-                    <h3>${eptit}</h3>
-                </div>
-            </div>`
-                      }  
-                }
-                document.querySelector('.anime-episodes').innerHTML = card
-        }
-searchBar.addEventListener('keyup' ,search )
+      
 
 
 // fav
@@ -351,18 +474,6 @@ let favAnDesc = document.querySelector('.text-container p')
 let favAnimes;
 let on;
 
-
-
-
-                                                                                                //problem eli el hearts is not defined
-
-
-
-
-
-
-
-
 var showDetails = () =>{
         const popUps = document.querySelectorAll('.pop-up')
         const carts = document.querySelectorAll('.anime-episodes .fcard')
@@ -375,4 +486,80 @@ var showDetails = () =>{
 }
 
 
-//add to favorite
+//light-mode
+const moon = document.querySelector('.nav .light-mode .fa-moon')
+const sun = document.querySelector('.nav .light-mode .fa-sun')
+const moonCon = document.querySelector('.light-mode .moon-con')
+const sunCon = document.querySelector('.light-mode .sun-con')
+const lightMode = document.querySelector('.light-mode')
+const btns = document.querySelector('button')
+console.log(lightMode , sunCon)
+
+let mode;
+if(localStorage.mode != null){
+        mode = localStorage.mode
+}
+else{
+        mode ="light"
+}
+window.onload = ()=>{
+        if(localStorage.mode != null){
+                if(localStorage.mode ==="light"){
+                        body.classList.add('light-theme')
+                        moonCon.style.opacity= '0'
+                        sunCon.style.opacity ='1'
+                        sunCon.style.visibility ='visible'
+                        moonCon.style.visibility ='hidden'
+                        moonCon.style.transform ='translateX(24px)'
+                        sunCon.style.transform ='translateX(24px)'
+                }
+        }
+}
+
+let body = document.body
+
+        
+        
+        lightMode.addEventListener('click' , function(){
+
+               
+               if(localStorage.mode === "dark"){ 
+                moonCon.style.opacity= '0'
+                moonCon.style.transition ='opacity 0.2s'
+                
+                
+        setTimeout(() => {
+                sunCon.style.opacity ='1'
+                sunCon.style.visibility ='visible'
+                moonCon.style.visibility ='hidden'
+                moonCon.style.transform ='translateX(24px)'
+                sunCon.style.transform ='translateX(24px)'
+        }, 200);
+                mode = "light" 
+                localStorage.mode = mode
+                document.body.classList.add('light-theme')
+}
+
+
+                else{
+        console.log("yatek zaieze")
+        
+                sunCon.style.opacity ='0'
+                sunCon.style.transition ='opacity 0.2s'
+                
+
+        setTimeout(() => {
+                sunCon.style.visibility ='hidden'
+                //showmoon
+                moonCon.style.opacity ='1'
+                moonCon.style.visibility ='visible'
+                moonCon.style.transform ="translateX(0)"
+        }, 200);
+                mode ="dark"
+                localStorage.mode = mode
+        document.body.classList.remove('light-theme')
+        
+        
+}
+})
+

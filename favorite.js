@@ -97,3 +97,51 @@ var showDetails = () =>{
 }
 }
 
+// light mode 
+const moon = document.querySelector('.nav .light-mode .fa-moon')
+const sun = document.querySelector('.nav .light-mode .fa-sun')
+const moonCon = document.querySelector('.light-mode .moon-con')
+const sunCon = document.querySelector('.light-mode .sun-con')
+const lightMode = document.querySelector('.light-mode')
+const btns = document.querySelector('button')
+console.log(lightMode , sunCon)
+
+let mode = 'dark'
+localStorage.setItem('mode' , mode)
+let body = document.body
+
+
+        
+        lightMode.addEventListener('click' , function(){
+
+               if(localStorage.mode === "dark"){ 
+                moonCon.style.opacity= '0'
+                moonCon.style.transition ='opacity 0.2s'
+                mode = "light" 
+                localStorage.mode = mode
+        setTimeout(() => {
+                sunCon.style.opacity ='1'
+                sunCon.style.visibility ='visible'
+                moonCon.style.visibility ='hidden'
+                moonCon.style.transform ='translateX(24px)'
+                sunCon.style.transform ='translateX(24px)'
+        }, 200);
+        document.body.classList.add('light-theme')}
+        else{
+        console.log("yatek zaieze")
+        
+                sunCon.style.opacity ='0'
+                sunCon.style.transition ='opacity 0.2s'
+                localStorage.mode = "dark"
+        setTimeout(() => {
+                sunCon.style.visibility ='hidden'
+                //showmoon
+                moonCon.style.opacity ='1'
+                moonCon.style.visibility ='visible'
+                moonCon.style.transform ="translateX(0)"
+        }, 200);
+        document.body.classList.remove('light-theme')
+        
+        
+}
+})

@@ -16,31 +16,60 @@
   --violet: #9D4EDD;
   --text: #EAEAEA;
   --gray: #1C1C1C;
+  --btn : #FF6B00;
+  --nav : #000000;
 }
-body{
-    height: 100vh;
-    background-color: #000000;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body.light-theme {
+  --black:  linear-gradient(135deg, #FF6B00 , #c066e4);
+  --gray: #E5DFF2;
+  --violet: #fff;
+  --orange: #FF8C42;
+  --text: #1C1C1C;
+  --btn : #9D4EDD;
+    --nav :  hsla(15, 100%, 61%, 1);
 
+--nav: linear-gradient(180deg, hsla(15, 100%, 61%, 1) 0%, hsla(29, 96%, 50%, 1) 50%, hsla(0, 100%, 68%, 1) 80%);
+
+--nav: -moz-linear-gradient(180deg, hsla(15, 100%, 61%, 1) 0%, hsla(29, 96%, 50%, 1) 50%, hsla(0, 100%, 68%, 1) 80%);
+
+--nav: -webkit-linear-gradient(180deg, hsla(15, 100%, 61%, 1) 0%, hsla(29, 96%, 50%, 1) 50%, hsla(0, 100%, 68%, 1) 80%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#FF6B3A", endColorstr="#FA7B05", GradientType=1 );
+  background: hsla(15, 100%, 61%, 1);
+
+background: linear-gradient(180deg, hsla(15, 100%, 61%, 1) 0%, hsla(29, 96%, 50%, 1) 50%, hsla(0, 100%, 68%, 1) 80%);
+
+background: -moz-linear-gradient(180deg, hsla(15, 100%, 61%, 1) 0%, hsla(29, 96%, 50%, 1) 50%, hsla(0, 100%, 68%, 1) 80%);
+
+background: -webkit-linear-gradient(180deg, hsla(15, 100%, 61%, 1) 0%, hsla(29, 96%, 50%, 1) 50%, hsla(0, 100%, 68%, 1) 80%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#FF6B3A", endColorstr="#FA7B05", GradientType=1 );
 }
-.container{
-    height: 100%;
-    width: 100%;
-    background-color: var(--black);
-    overflow-x: hidden;
+body {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--black);
+  margin: 0;
+  padding: 0;
 }
+
+.container {
+  width: 100%;
+  background-color: var(--black);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+
 .container p{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 }
 button{
-  background: var(--orange);
+  background: var(--btn);
   color: var(--black);
   box-shadow: 0 0 15px var(--orange);
-  border: 1px solid black;
+  border: 1px solid var(--black);
   cursor: pointer;
   transition: 0.3s;
 }
@@ -58,10 +87,14 @@ nav{
     display: flex;
     padding: 20px;
     justify-content: space-between;
-    background-color: var(--black);
+    background: var(--nav);
     text-transform: capitalize;
     align-items: flex-start;
-    position: relative;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    
+    
 }
 nav ul li{
     list-style: none;
@@ -89,6 +122,7 @@ nav ul a:hover{
     width: 100%;
     height: 400px;
     position: relative;
+    margin-top: 72px;
 }
 .hero-section .img-box{
     width: 100%;
@@ -116,7 +150,7 @@ nav ul a:hover{
    
 }
 .hero-section .input a{
-    color: black;
+    color: var(--black);
 }
 .hero-section .input a{
     display: inline-block;
@@ -140,21 +174,23 @@ nav ul a:hover{
     transform: scale(1.5);
     cursor: pointer;
 }
+
 nav ul li :last-child{
     width: 32px;
     height: 32px;
     margin: 0;
     padding: 0;
 }
-nav ul img{
+nav ul #search-icon{
 cursor: pointer;
-
+font-size: 26px;
+color: var(--violet);
 }
 .popular-anime{
     display: flex;
     padding: 10px;
     justify-content: space-evenly;
-    overflow: hidden;
+    overflow: visible;
     margin: 0;
     position: relative;
 }
@@ -172,7 +208,7 @@ cursor: pointer;
     height: 370px;
     overflow: visible;
     min-width: 0;
-    background-color: #222;
+    background-color: var(--gray);
     transform: scale(.9);
     position: relative;
     z-index: 1;
@@ -192,13 +228,14 @@ cursor: pointer;
     line-height: 1.4;
     padding: 0 10px;
     margin-bottom: 10px;
+    color: var(--text);
 }
 .card h2,.fcard h2{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 10px;
-    color: white;
+    color: var(--text);
     text-shadow: none;
 }
 .naruto{
@@ -219,14 +256,14 @@ cursor: pointer;
 }
 ::-webkit-scrollbar-track{
     background-color: #111;
-    border-radius: 6px;
+    
 }
 ::-webkit-scrollbar-thumb{
     background: var(--violet);
     border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(161, 2, 161);
+    background: var(--violet);
 }
 #newanime{
     position: relative;
@@ -292,11 +329,11 @@ cursor: pointer;
 }
 .anime-episodes h2{
     font-family: "neo";
-    color: white;
+    color: var(--text);
     text-shadow: none;
 }
 .anime-episodes p{
-    color: white;
+    color: var(--text);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 #searchbar-container{
@@ -314,7 +351,7 @@ cursor: pointer;
     display: none;
 }
 #searchbar-container input{
-    width: 80%;
+    width: 73%;
     height: 100%;
     border-radius: 15px;
     border: 1px solid rgb(194, 185, 185);
@@ -397,4 +434,49 @@ cursor: pointer;
 
     display: none;
 
+}
+.nav .light-mode{
+    width: 50px;
+    height: 26px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    position: absolute;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3px;
+    cursor: pointer;
+}
+.nav .light-mode .moon-con{
+    background-color: #ffffff;
+    box-shadow: 0 0 10px 2px var(--violet);
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
+
+.nav .light-mode .fa-moon{
+    transform: scale(0.9);
+    color: var(--violet);
+}
+.nav .light-mode .fa-sun{
+    transform: scale(0.9);
+    color: var(--orange);
+}
+.nav .light-mode .sun-con {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.3s ease;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px 2px var(--orange);
+  border-radius: 50%;
+  cursor: pointer;
+  visibility: hidden; 
+}
+body.light-theme .fcard .img-box:hover img{
+    opacity: 0.8;
 }
