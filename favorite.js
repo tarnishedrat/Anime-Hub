@@ -23,14 +23,14 @@ async function getNewEpisodes(){
                         
                 const shortEnough = data.data[x].title.length <70
                 card += `
-                 <div class="fcard">
+                 <div class="fcard fav">
             <div class="img-box"><img src="${data.data[tmp[x]].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
             <i class="fa-solid fa-heart"></i>
             </div>
             <div class="text-container">
                 
                 <h2>${data.data[tmp[x]].title}</h2>
-                <p>${data.data[tmp[x]].synopsis}</p>
+                
                 </div>
                  <div class="pop-up">
                <div id="text">

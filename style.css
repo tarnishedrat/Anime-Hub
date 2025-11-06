@@ -18,16 +18,19 @@
   --gray: #1C1C1C;
   --btn : #FF6B00;
   --nav : #000000;
+  --text-con : #20172d;
+  --titles : #EAEAEA;
 }
 body.light-theme {
   --black:  linear-gradient(135deg, #FF6B00 , #c066e4);
   --gray: #E5DFF2;
   --violet: #fff;
   --orange: #FF8C42;
-  --text: #1C1C1C;
+  --text: #fff;
   --btn : #9D4EDD;
-    --nav :  hsla(15, 100%, 61%, 1);
-
+  --nav :  hsla(15, 100%, 61%, 1);
+  --text-con : #f27ef6;
+  --titles : #20172d;
 --nav: linear-gradient(180deg, hsla(15, 100%, 61%, 1) 0%, hsla(29, 96%, 50%, 1) 50%, hsla(0, 100%, 68%, 1) 80%);
 
 --nav: -moz-linear-gradient(180deg, hsla(15, 100%, 61%, 1) 0%, hsla(29, 96%, 50%, 1) 50%, hsla(0, 100%, 68%, 1) 80%);
@@ -203,29 +206,26 @@ color: var(--violet);
     width: 100%;
     height: 289px;
 }
-.card{
+.card {
     width: 215px;
-    height: 350px;
+    height: 370px;
     overflow: visible;
     min-width: 0;
-    background-color: #222;
+    background-color: var(--text-con);
+    transform: scale(.9);
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-row: 8fr 2fr;
-
- }
+}
 .fcard{
     width: 275px;
     height: 225.2px;
     overflow: visible;
     min-width: 0;
-    background-color: #222;
+    background-color: var(--text-con);
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-row: 8fr 2fr;
-
+    grid-template-rows: 8fr 2fr;
  }
 .fcard .img-box{
     height: calc(225px * 0.8)
@@ -237,11 +237,12 @@ color: var(--violet);
     justify-content: center;
     height: calc(225px * 0.2);
     padding: 0 10px;
-    background: #20172d;
+    background: var(--text-con);
+   
 }
 .card .text-container{
     overflow: hidden;
-    background: #20172d
+    background: var(--text-con)
     
 }
 .card p,.fcard p{
@@ -259,7 +260,6 @@ color: var(--violet);
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 10px;
-    color: white;
     text-shadow: none;
     font-size: 25px;
 }
@@ -267,10 +267,11 @@ color: var(--violet);
      white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: white;
+    color: var(--text);
     text-shadow: none;
     font-size: 20px;
 }
+
 .naruto{
     display: none;
 }
@@ -310,7 +311,7 @@ color: var(--violet);
     flex-wrap: wrap;
     width: 75%;
     margin: auto;
-    min-height: 100vh;
+    min-height: fit-content;
     padding: 5px;
     align-content: flex-start;
 }
@@ -320,7 +321,8 @@ color: var(--violet);
     flex-wrap: wrap;
     width: 75%;
     margin: auto;
-    min-height: 100vh;
+    margin-top: 82px;
+    height: fit-content;
     padding: 5px;
 }
 .anime-card{
@@ -362,7 +364,6 @@ color: var(--violet);
 }
 .anime-episodes h2{
     font-family: "neo";
-    color: var(--text);
     text-shadow: none;
 }
 .anime-episodes p{
