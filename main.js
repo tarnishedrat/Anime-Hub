@@ -22,7 +22,7 @@ searchIcon.addEventListener('click' , function(){
         nav.style.width ="100%" */
         nav.style.zIndex ="10000"
         window.scroll({
-                top: 793,
+                top: 801,
                 behavior: 'smooth'
                 });
                 searchBar.addEventListener('blur' , function(){
@@ -30,7 +30,6 @@ searchIcon.addEventListener('click' , function(){
                 })
        
 })
-
 
 
 console.log(heroSecH1)
@@ -247,7 +246,9 @@ async function getNewEpisodes(){
         const url = 'https://api.jikan.moe/v4/seasons/now'
         const res  = await fetch(url)
         const data = await res.json()
+        console.log(data)
         let card =""
+        let popcard =""
         for(let x = 0 ; x < data.data.length ; x++){
                 const desc = data.data[x].synopsis != null
                 const lightTheme = document.body.classList.contains('light-theme')
@@ -263,44 +264,55 @@ async function getNewEpisodes(){
                 <h2>${data.data[x].title}</h2>
                 
                 </div>
-                <div class="pop-up">
-               <div id="text">
-                 ${shortEnough ? `<p>${data.data[x].title}</p>` : ''}
-                ${desc?`<p > ${data.data[x].synopsis}</p>` :`<p style="color: var(--text);">No description</p>`}
-                <p>${data.data[x].status}</p>
-                <p class='epday'>Episode day: ${data.data[x].broadcast.day}</p>
                 
-                <p>Genres: ${data.data[x].genres[0].name}</p>
-                </div>
-                <button id="watchbtn">Watch Now!</button>
-                </div>
                 
 
                
             </div>`
+                popcard += `
+                <div class="pop-up">
+                <i class="fa-solid fa-xmark"></i>
+                <div class="img-box"><img src="${data.data[x].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
+            
+            </div>
+               <div class="text">
+                 ${shortEnough ? `<h2>${data.data[x].title}</h2>` : ''}
+                ${desc?`<p id='desc' > ${data.data[x].synopsis}</p>` :`<p style="color: var(--text);">No description</p>`}
+                <p id="status">${data.data[x].status}</p>
+                <p class='epday'>Episode day: ${data.data[x].broadcast.day}</p>
                 
+                <p id='genre'>Genres: ${data.data[x].genres[0].name}</p>
+                <button id="watchbtn">Watch Now!</button>
+                </div>
+                
+                </div>
+                `
                
         }
         document.querySelector('.anime-episodes').innerHTML = card
+        document.querySelector('.anime-episodes').innerHTML += popcard
         showDetails()
 }
 getNewEpisodes().then(() =>{
        /*   */
        
-
-let ftitle = document.querySelectorAll('.fcard .text-container h2')
+       
+        let ftitle = document.querySelectorAll('.fcard .text-container h2')
 
         let synopsis = document.querySelectorAll('.synopsis')
         let imgs = document.querySelectorAll('.fav-anime-img')
-        let broadcast = document.querySelectorAll('.epday') 
+        
         console.log(synopsis)
         const lightTheme = document.body.classList.contains('light-theme')
 
         let hearts = document.querySelectorAll('.fcard .img-box i')
 
-
-
-                    
+        const description  = document.querySelectorAll('.pop-up #desc')
+        const status = document.querySelectorAll('.pop-up #status')
+        const genre = document.querySelectorAll('.pop-up #genre')
+        const epday = document.querySelectorAll('.pop-up .epday')
+        console.log(status , epday , genre , description)
+        
                    /*
 
 for (let x = 0; x < hearts.length; x++) {
@@ -328,7 +340,7 @@ for (let x = 0; x < hearts.length; x++) {
           const search =()=>{
                 console.log(tmp)
 
-                 if(localStorage.x != null){
+                /*  if(localStorage.x != null){
                 for(let x = 0; x < tmp.length; x++) {
                         const INDEXOF = tmp[x]
                 
@@ -337,9 +349,9 @@ for (let x = 0; x < hearts.length; x++) {
                         hearts[INDEXOF].classList.add('red')  
                         console.log(hearts[tmp[x]])
                 }
-        }
+        } */
         console.log(hearts)
-for (let x = 0; x < hearts.length; x++) {
+/* for (let x = 0; x < hearts.length; x++) {
         hearts[x].addEventListener('click' , function(e){
                 e.stopPropagation()
                 hearts[x].classList.toggle('red')
@@ -355,22 +367,28 @@ for (let x = 0; x < hearts.length; x++) {
                 }
                 console.log(tmp)
         })  
-}
+} */
    
 
 
 
-                
+                let popcard =''
                 let card =''
-                for (let x = 0; x < synopsis.length; x++){
-                        const desc = synopsis[x] != null
-                        let syno = synopsis[x].innerHTML
+             
                         
                         const shortEnough = ftitle[x].length <70
                 if(ftitle[x].innerHTML.toLowerCase().includes(searchBar.value)){
                         const eptit = ftitle[x].innerHTML
                         const epim = imgs[x].src
-                        const brod = broadcast[x].innerHTML
+                        
+                        const epdes = description[x].innerHTML
+                        const desc = epdes[x]!= null
+                        const stat = status[x].innerHTML
+                        const epd = epday[x].innerHTML
+                        const gen = genre[x].innerHTML
+                        
+
+                      
                        /*   */ 
                         card += `
                  <div class="fcard">
@@ -380,32 +398,38 @@ for (let x = 0; x < hearts.length; x++) {
             <div class="text-container">
                 
                 <h2>${eptit}</h2>
-                ${desc? `<p class="synopsis">${syno}</p>` :`<p style="color: var(--text);">No description</p>`}
-                </div>
-                
-                <div class="pop-up">
-               <div id="text">
-                 ${shortEnough ? `<p>${eptit}</p>` : ''}
-                ${desc?`<p > ${syno}</p>` :`<p style="color: var(--text);">No description</p>`}
-                
-
-                <p class='epday'>Episode day: ${brod}</p>
-                
                 
                 </div>
-                <button id="watchbtn">Watch Now!</button>
-                </div>
+                
+               
 
                
             </div>`
-                        
+                     popcard += `
+                <div class="pop-up">
+                <i class="fa-solid fa-xmark"></i>
+                <div class="img-box"><img src="${epim}" alt="..." class="fav-anime-img">
             
+            </div>
+               <div class="text">
+                 ${shortEnough ? `<h2>${eptit}</h2>` : ''}
+                ${desc?`<p > ${epdes}</p>` :`<p style="color: var(--text);">No description</p>`}
+                <p>${stat}</p>
+                <p class='epday'>Episode day: ${epd}</p>
+                
+                <p>Genres: ${gen}</p>
+                <button id="watchbtn">Watch Now!</button>
+                </div>
+                
+                </div>   
+            `
                       }  
                       
-                }
+                
                 
                
                 document.querySelector('.anime-episodes').innerHTML = card
+                document.querySelector('.anime-episodes').innerHTML += popcard
                
         }
 searchBar.addEventListener('keyup' ,search )
@@ -427,7 +451,17 @@ searchBar.addEventListener('keyup' ,search )
         console.log(hearts)
    
    */
-     
+     let popup = document.querySelectorAll('.pop-up')
+       let xmarks = document.querySelectorAll('.fa-xmark')
+       console.log(popup)
+       console.log(xmarks)
+        xmarks.forEach(mark =>{
+                mark.addEventListener('click' , ()=>{
+                        popup.forEach(pop =>{
+                                pop.classList.remove('show')
+                        })
+                })
+        })
 })
 
 

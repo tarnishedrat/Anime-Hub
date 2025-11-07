@@ -7,7 +7,19 @@ const imgs = document.querySelectorAll('.img-box img')
 const textCon = document.querySelectorAll('.text-container') 
 const aniTile = document.querySelectorAll('.text-container h2') 
 const aniDesc = document.querySelectorAll('.text-container p') 
-
+window.onload = ()=>{
+        if(localStorage.mode != null){
+                if(localStorage.mode ==="light"){
+                        body.classList.add('light-theme')
+                        moonCon.style.opacity= '0'
+                        sunCon.style.opacity ='1'
+                        sunCon.style.visibility ='visible'
+                        moonCon.style.visibility ='hidden'
+                        moonCon.style.transform ='translateX(24px)'
+                        sunCon.style.transform ='translateX(24px)'
+                }
+        }
+}
 
 async function getNewEpisodes(){
         const url = 'https://api.jikan.moe/v4/seasons/now'
@@ -106,8 +118,13 @@ const lightMode = document.querySelector('.light-mode')
 const btns = document.querySelector('button')
 console.log(lightMode , sunCon)
 
-let mode = 'dark'
-localStorage.setItem('mode' , mode)
+let mode ;
+if(localStorage.mode != null){
+        mode = localStorage.mode
+}
+else{
+        mode ="light"
+}
 let body = document.body
 
 
