@@ -255,7 +255,7 @@ async function getNewEpisodes(){
                 const shortEnough = data.data[x].title.length <70
                 
                 card += `
-                 <div class="fcard">
+                 <div class="fcard" >
             <div class="img-box"><img src="${data.data[x].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
             <i class="fa-solid fa-heart HS"></i>
             </div>
@@ -270,14 +270,14 @@ async function getNewEpisodes(){
                
             </div>`
                 popcard += `
-                <div class="pop-up">
+                <div class="pop-up" >
                 <i class="fa-solid fa-xmark"></i>
                 <div class="img-box"><img src="${data.data[x].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
             
             </div>
                <div class="text">
                  ${shortEnough ? `<h2>${data.data[x].title}</h2>` : ''}
-                ${desc?`<p id='desc' > ${data.data[x].synopsis}</p>` :`<p style="color: var(--text);">No description</p>`}
+                ${desc?`<p class='desc' > ${data.data[x].synopsis}</p>` :`<p style="color: var(--text);">No description</p>`}
                 <p id="status">${data.data[x].status}</p>
                 <p class='epday'>Episode day: ${data.data[x].broadcast.day}</p>
                 
@@ -297,23 +297,25 @@ getNewEpisodes().then(() =>{
        /*   */
        
        
-        let ftitle = document.querySelectorAll('.fcard .text-container h2')
+        
 
-        let synopsis = document.querySelectorAll('.synopsis')
-        let imgs = document.querySelectorAll('.fav-anime-img')
+       /*  let synopsis = document.querySelectorAll('.synopsis')
+        let fimgs = document.querySelectorAll('.fav-anime-img')
         
         console.log(synopsis)
         const lightTheme = document.body.classList.contains('light-theme')
 
-        let hearts = document.querySelectorAll('.fcard .img-box i')
+        
 
-        const description  = document.querySelectorAll('.pop-up #desc')
+        const description  = document.querySelectorAll('.pop-up .desc')
         const status = document.querySelectorAll('.pop-up #status')
         const genre = document.querySelectorAll('.pop-up #genre')
         const epday = document.querySelectorAll('.pop-up .epday')
         console.log(status , epday , genre , description)
         
-                   /*
+        const text = document.querySelectorAll('.pop-up .text') */
+ 
+  let hearts = document.querySelectorAll('.fcard .img-box i')
 
 for (let x = 0; x < hearts.length; x++) {
         hearts[x].addEventListener('click' , function(e){
@@ -333,110 +335,41 @@ for (let x = 0; x < hearts.length; x++) {
         })  
 }
 
- */
+ 
 
              
         
-          const search =()=>{
-                console.log(tmp)
-
-                /*  if(localStorage.x != null){
-                for(let x = 0; x < tmp.length; x++) {
-                        const INDEXOF = tmp[x]
-                
-
-
-                        hearts[INDEXOF].classList.add('red')  
-                        console.log(hearts[tmp[x]])
-                }
-        } */
-        console.log(hearts)
-/* for (let x = 0; x < hearts.length; x++) {
-        hearts[x].addEventListener('click' , function(e){
-                e.stopPropagation()
-                hearts[x].classList.toggle('red')
-
-                if(hearts[x].classList.contains('red')){
-                        tmp.push(x)
-                        localStorage.setItem('x' , JSON.stringify(tmp)) 
-                }else{
-                        const INDEXOF = tmp.indexOf(x) 
-                        tmp.splice(INDEXOF , 1)
-                        localStorage.setItem('x' , JSON.stringify(tmp)) 
-                        
-                }
-                console.log(tmp)
-        })  
-} */
-   
-
-
-
-                let popcard =''
-                let card =''
-             
-                        
-                        const shortEnough = ftitle[x].length <70
-                if(ftitle[x].innerHTML.toLowerCase().includes(searchBar.value)){
-                        const eptit = ftitle[x].innerHTML
-                        const epim = imgs[x].src
-                        
-                        const epdes = description[x].innerHTML
-                        const desc = epdes[x]!= null
-                        const stat = status[x].innerHTML
-                        const epd = epday[x].innerHTML
-                        const gen = genre[x].innerHTML
-                        
-
-                      
-                       /*   */ 
-                        card += `
-                 <div class="fcard">
-            <div class="img-box"><img src="${epim}" alt="..." class="fav-anime-img">
-            <i class="fa-solid fa-heart HS"></i>
-            </div>
-            <div class="text-container">
-                
-                <h2>${eptit}</h2>
-                
-                </div>
-                
-               
-
-               
-            </div>`
-                     popcard += `
-                <div class="pop-up">
-                <i class="fa-solid fa-xmark"></i>
-                <div class="img-box"><img src="${epim}" alt="..." class="fav-anime-img">
-            
-            </div>
-               <div class="text">
-                 ${shortEnough ? `<h2>${eptit}</h2>` : ''}
-                ${desc?`<p > ${epdes}</p>` :`<p style="color: var(--text);">No description</p>`}
-                <p>${stat}</p>
-                <p class='epday'>Episode day: ${epd}</p>
-                
-                <p>Genres: ${gen}</p>
-                <button id="watchbtn">Watch Now!</button>
-                </div>
-                
-                </div>   
-            `
-                      }  
-                      
-                
-                
-               
-                document.querySelector('.anime-episodes').innerHTML = card
-                document.querySelector('.anime-episodes').innerHTML += popcard
-               
-        }
+          
 searchBar.addEventListener('keyup' ,search )
 
 
 
 }).then(()=>{
+
+       
+      /*  let synopsis = document.querySelectorAll('.synopsis')
+        let fimgs = document.querySelectorAll('.fav-anime-img')
+                        
+        console.log(fimgs)
+        const lightTheme = document.body.classList.contains('light-theme')
+
+                       
+
+                        const description  = document.querySelectorAll('.pop-up .desc')
+                        const status = document.querySelectorAll('.pop-up #status')
+                        const genre = document.querySelectorAll('.pop-up #genre')
+                        const epday = document.querySelectorAll('.pop-up .epday')
+                        const text = document.querySelectorAll('.pop-up .text')
+                        const Ftit = document.querySelectorAll('.fcard h2')
+ */
+
+       
+
+
+
+
+
+
     let hearts = document.querySelectorAll('.fcard .img-box .HS')
 
 
@@ -451,8 +384,8 @@ searchBar.addEventListener('keyup' ,search )
         console.log(hearts)
    
    */
-     let popup = document.querySelectorAll('.pop-up')
-       let xmarks = document.querySelectorAll('.fa-xmark')
+    let popup = document.querySelectorAll('.pop-up')
+    let xmarks = document.querySelectorAll('.fa-xmark')
        console.log(popup)
        console.log(xmarks)
         xmarks.forEach(mark =>{
@@ -465,9 +398,134 @@ searchBar.addEventListener('keyup' ,search )
 })
 
 
+function search(){
+        let synopsis = document.querySelectorAll('.synopsis')
+        let fimgs = document.querySelectorAll('.fav-anime-img')
+        const description  = document.querySelectorAll('.pop-up .desc')
+        const status = document.querySelectorAll('.pop-up #status')
+        const genre = document.querySelectorAll('.pop-up #genre')
+        const epday = document.querySelectorAll('.pop-up .epday')
+        const text = document.querySelectorAll('.pop-up .text')
+        const Ftit = document.querySelectorAll('.fcard h2')
+          
+        let fcard = document.querySelectorAll('.fcard')
+        const imgs = [...fimgs].map(im => im.src)
+        const tit = Array.from(Ftit).map(t => t.innerHTML)
+        console.log(imgs)       
+           
+        let card  =''
+        for(let x = 0 ; x < fcard.length; x++){
+                
+                if( tit[x].toLowerCase().includes(searchBar.value)){
+                card += `
+                 <div class="fcard" >
+            <div class="img-box"><img src="${imgs[x]}" alt="..." class="fav-anime-img">
+            <i class="fa-solid fa-heart HS"></i>
+            </div>
+            <div class="text-container">
+                
+                <h2>${tit[x]}</h2>
+                
+                </div>
+                
+                
+
+               
+           
+                
+                </div>
+                `}
+               
+        }
+        document.querySelector('.anime-episodes').innerHTML = card
+       /*  document.querySelector('.anime-episodes').innerHTML += popcard */
+                
+                
+                
+                
+                
+        }
+        
+   
+        /* 
+        const text = document.querySelectorAll('.pop-up .text')
+
+                let popcard =''
+                let card =''
+             
+                const Ftit = document.querySelectorAll('.fcard h2')
+                console.log(Ftit)
+
+                        
+                if(Array.from(Ftit).map(x =>x.innerHTML.toLowerCase().includes(searchBar.value) )){
+                        let synopsis = document.querySelectorAll('.synopsis')
+                        let fimgs = document.querySelectorAll('.fav-anime-img')
+                        
+                        console.log(fimgs)
+                        const lightTheme = document.body.classList.contains('light-theme')
+
+                        let hearts = document.querySelectorAll('.fcard .img-box i')
+
+                        const description  = document.querySelectorAll('.pop-up #desc')
+                        const status = document.querySelectorAll('.pop-up #status')
+                        const genre = document.querySelectorAll('.pop-up #genre')
+                        const epday = document.querySelectorAll('.pop-up .epday')
 
 
+                        const shortEnough = Array.from(Ftit).map(x =>x.length <70)
+                        const eptit = Array.from(Ftit).map(x =>x.innerHTML)
+                        const epim = Array.from(fimgs).map(img =>img.src)
+                        console.log(epim[0])
+                        const epdes = Array.from(description).map(des => des.innerHTML)
+                        
+                        const stat = Array.from(status).map(x => x.innerHTML)
+                        const epd = Array.from(epday).map(x =>x.innerHTML)
+                        const gen = Array.from(genre).map(x =>x.innerHTML)
+                        
 
+                      
+                      
+                        card += `
+                 <div class="fcard">
+            <div class="img-box"><img src="${epim}" alt="..." class="fav-anime-img">
+            <i class="fa-solid fa-heart HS"></i>
+            </div>
+            <div class="text-container">
+                
+                <h2 id ='Ftit'>${eptit}</h2>
+                
+                </div>
+                
+            </div>`
+                     popcard += `
+                <div class="pop-up">
+                <i class="fa-solid fa-xmark"></i>
+                <div class="img-box"><img src="${epim}" alt="..." class="fav-anime-img">
+            
+            </div>
+               <div class="text">
+                ${shortEnough ? `<h2>${eptit}</h2>` : ''}
+                ${eptit?`<p > ${epdes}</p>` :`<p style="color: var(--text);">No description</p>`}
+                <p id='stat'>${stat}</p>
+                <p class='epday'>Episode day: ${epd}</p>
+                
+                <p id='genre'>Genres: ${gen}</p>
+                <button id="watchbtn">Watch Now!</button>
+                </div>
+                
+                </div>   
+            `
+                      }  
+                      
+                
+                
+               
+                document.querySelector('.anime-episodes').innerHTML = card
+                document.querySelector('.anime-episodes').innerHTML += popcard 
+               
+        }
+
+*/
 
 
 
@@ -507,17 +565,38 @@ let favAnDesc = document.querySelector('.text-container p')
 
 let favAnimes;
 let on;
+const text = document.querySelectorAll('.pop-up .text')
 
-var showDetails = () =>{
-        const popUps = document.querySelectorAll('.pop-up')
-        const carts = document.querySelectorAll('.anime-episodes .fcard')
-        console.log(popUps)
-        for(let x = 0; x < carts.length; x++) {
-                carts[x].addEventListener('click' , function(){
-                        popUps[x].classList.toggle('show')
-                })
-}
-}
+var showDetails = () => {
+  const popUps = document.querySelectorAll('.pop-up');
+  const carts = document.querySelectorAll('.anime-episodes .fcard');
+        popUps.forEach(p => {
+        p.style.transition ='all ease-in-out 0.2s'
+      })
+  for (let x = 0; x < carts.length; x++) {
+    carts[x].addEventListener('click', function (e) {
+      // Hide all others first
+       popUps.forEach(p =>p.classList.remove('show'))
+
+      // Toggle only the clicked one
+      
+        popUps[x].classList.toggle('show')
+        
+      // Stop this click from reaching the document
+        e.stopPropagation()
+    });
+
+      // Prevent popup clicks from closing themselves
+        popUps[x].addEventListener('click', e => e.stopPropagation());
+  }
+
+  // Click anywhere else = close all popups
+   document.addEventListener('click' , function(){
+        popUps.forEach(p => p.classList.remove('show'))
+   })
+};
+
+
 
 
 //light-mode
