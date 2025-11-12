@@ -338,9 +338,7 @@ for (let x = 0; x < hearts.length; x++) {
  
 
              
-        
-          
-searchBar.addEventListener('keyup' ,search )
+
 
 
 
@@ -361,7 +359,7 @@ searchBar.addEventListener('keyup' ,search )
                         const epday = document.querySelectorAll('.pop-up .epday')
                         const text = document.querySelectorAll('.pop-up .text')
                         const Ftit = document.querySelectorAll('.fcard h2')
- */
+
 
        
 
@@ -398,7 +396,7 @@ searchBar.addEventListener('keyup' ,search )
 })
 
 
-function search(){
+/* function search(){
         let synopsis = document.querySelectorAll('.synopsis')
         let fimgs = document.querySelectorAll('.fav-anime-img')
         const description  = document.querySelectorAll('.pop-up .desc')
@@ -410,13 +408,13 @@ function search(){
           
         let fcard = document.querySelectorAll('.fcard')
         const imgs = [...fimgs].map(im => im.src)
-        const tit = Array.from(Ftit).map(t => t.innerHTML)
-        console.log(imgs)       
+        const tit = Array.from(Ftit).map(t => t.innerHTML)     
            
+
         let card  =''
         for(let x = 0 ; x < fcard.length; x++){
                 
-                if( tit[x].toLowerCase().includes(searchBar.value)){
+                if(tit[x].toLowerCase().includes(searchBar.value)){
                 card += `
                  <div class="fcard" >
             <div class="img-box"><img src="${imgs[x]}" alt="..." class="fav-anime-img">
@@ -438,7 +436,7 @@ function search(){
                
         }
         document.querySelector('.anime-episodes').innerHTML = card
-       /*  document.querySelector('.anime-episodes').innerHTML += popcard */
+        document.querySelector('.anime-episodes').innerHTML += popcard 
                 
                 
                 
@@ -446,111 +444,59 @@ function search(){
                 
         }
         
-   
-        /* 
-        const text = document.querySelectorAll('.pop-up .text')
+searchBar.addEventListener('keyup' , search) */
+ // 🟢 SEARCH FUNCTION
+function search() {
+  // get all needed elements
+  const synopsis = document.querySelectorAll('.synopsis');
+  const fimgs = document.querySelectorAll('.fav-anime-img');
+  const Ftit = document.querySelectorAll('.fcard h2');
+  const popUps = document.querySelectorAll('.pop-up');
 
-                let popcard =''
-                let card =''
-             
-                const Ftit = document.querySelectorAll('.fcard h2')
-                console.log(Ftit)
+  // collect data
+  const imgs = [...fimgs].map(im => im.src);
+  const tit = Array.from(Ftit).map(t => t.innerHTML);
+  
 
-                        
-                if(Array.from(Ftit).map(x =>x.innerHTML.toLowerCase().includes(searchBar.value) )){
-                        let synopsis = document.querySelectorAll('.synopsis')
-                        let fimgs = document.querySelectorAll('.fav-anime-img')
-                        
-                        console.log(fimgs)
-                        const lightTheme = document.body.classList.contains('light-theme')
-
-                        let hearts = document.querySelectorAll('.fcard .img-box i')
-
-                        const description  = document.querySelectorAll('.pop-up #desc')
-                        const status = document.querySelectorAll('.pop-up #status')
-                        const genre = document.querySelectorAll('.pop-up #genre')
-                        const epday = document.querySelectorAll('.pop-up .epday')
-
-
-                        const shortEnough = Array.from(Ftit).map(x =>x.length <70)
-                        const eptit = Array.from(Ftit).map(x =>x.innerHTML)
-                        const epim = Array.from(fimgs).map(img =>img.src)
-                        console.log(epim[0])
-                        const epdes = Array.from(description).map(des => des.innerHTML)
-                        
-                        const stat = Array.from(status).map(x => x.innerHTML)
-                        const epd = Array.from(epday).map(x =>x.innerHTML)
-                        const gen = Array.from(genre).map(x =>x.innerHTML)
-                        
-
-                      
-                      
-                        card += `
-                 <div class="fcard">
-            <div class="img-box"><img src="${epim}" alt="..." class="fav-anime-img">
+  // rebuild cards based on search input
+  let card = '';
+  for (let x = 0; x < Ftit.length; x++) {
+    if (tit[x].toLowerCase().includes(searchBar.value.toLowerCase())) {
+      card += `
+        <div class="fcard">
+          <div class="img-box">
+            <img src="${imgs[x]}" alt="..." class="fav-anime-img">
             <i class="fa-solid fa-heart HS"></i>
-            </div>
-            <div class="text-container">
-                
-                <h2 id ='Ftit'>${eptit}</h2>
-                
-                </div>
-                
-            </div>`
-                     popcard += `
-                <div class="pop-up">
-                <i class="fa-solid fa-xmark"></i>
-                <div class="img-box"><img src="${epim}" alt="..." class="fav-anime-img">
+          </div>
+          <div class="text-container">
+            <h2>${tit[x]}</h2>
             
-            </div>
-               <div class="text">
-                ${shortEnough ? `<h2>${eptit}</h2>` : ''}
-                ${eptit?`<p > ${epdes}</p>` :`<p style="color: var(--text);">No description</p>`}
-                <p id='stat'>${stat}</p>
-                <p class='epday'>Episode day: ${epd}</p>
-                
-                <p id='genre'>Genres: ${gen}</p>
-                <button id="watchbtn">Watch Now!</button>
-                </div>
-                
-                </div>   
-            `
-                      }  
-                      
-                
-                
-               
-                document.querySelector('.anime-episodes').innerHTML = card
-                document.querySelector('.anime-episodes').innerHTML += popcard 
-               
-        }
+          </div>
+        
+        </div>`;
+    }
+  }
 
-*/
+  document.querySelector('.anime-episodes').innerHTML = card;
+}
 
+function search() {
+  const searchValue = searchBar.value.toLowerCase();
+  const cards = document.querySelectorAll('.anime-episodes .fcard');
+  const titles = document.querySelectorAll('.anime-episodes .fcard h2');
 
+  for (let i = 0; i < cards.length; i++) {
+    const titleText = titles[i].innerText.toLowerCase();
+    if (titleText.includes(searchValue)) {
+      cards[i].style.display = "block"; // show card
+    } else {
+      cards[i].style.display = "none"; // hide card
+    }
+  }
+}
 
-
-/* const search = () =>{
- 
-        let cards = ''
-        for(x = 0 ; x < epTitle.length; x++){
-                if(epTitle[x].innerHTML.toLowerCase().includes(searchBar.value)){
-                        cards += ` 
-            <div class="anime-card">
-                <div class="img-con">
-                    <img src="${epImg[x].src}" alt="...">
-                    <h3>${epNum[x].innerHTML}</h3>
-                </div>
-                <div class="text-con">
-                    <h3>${epTitle[x].innerHTML}</h3>
-                </div>
-            </div>
-            ` 
-                }
-        }
-        document.querySelector('.anime-episodes').innerHTML =cards
-} */
-
+// trigger search on typing
+searchBar.addEventListener('keyup', search); 
 
       
 
