@@ -282,9 +282,9 @@ async function getNewEpisodes(){
                 <p class='epday'>Episode day: ${data.data[x].broadcast.day}</p>
                 
                 <p id='genre'>Genres: ${data.data[x].genres[0].name}</p>
-                <button id="watchbtn">Watch Now!</button>
-                </div>
                 
+                </div>
+                <button id="watchbtn">Watch Now!</button>
                 </div>
                 `
                
@@ -446,7 +446,7 @@ for (let x = 0; x < hearts.length; x++) {
         
 searchBar.addEventListener('keyup' , search) */
  // 🟢 SEARCH FUNCTION
-function search() {
+/* function search() {
   // get all needed elements
   const synopsis = document.querySelectorAll('.synopsis');
   const fimgs = document.querySelectorAll('.fav-anime-img');
@@ -478,9 +478,19 @@ function search() {
   }
 
   document.querySelector('.anime-episodes').innerHTML = card;
-}
+} */
 
 function search() {
+        let hearts = document.querySelectorAll('.fcard .img-box i')
+        console.log(hearts)
+        
+        if(localStorage.x != null){
+                for (let x = 0; x < tmp.length; x++) {
+                        let indexOf = tmp[x]
+                        hearts[indexOf].style.color='red'
+                        
+                }
+        }
   const searchValue = searchBar.value.toLowerCase();
   const cards = document.querySelectorAll('.anime-episodes .fcard');
   const titles = document.querySelectorAll('.anime-episodes .fcard h2');
@@ -514,32 +524,29 @@ let on;
 const text = document.querySelectorAll('.pop-up .text')
 
 var showDetails = () => {
+        //call the elements
   const popUps = document.querySelectorAll('.pop-up');
   const carts = document.querySelectorAll('.anime-episodes .fcard');
-        popUps.forEach(p => {
-        p.style.transition ='all ease-in-out 0.2s'
-      })
+
+  popUps.forEach(pop =>pop.style.transition ='all ease 0.2s')
   for (let x = 0; x < carts.length; x++) {
-    carts[x].addEventListener('click', function (e) {
-      // Hide all others first
-       popUps.forEach(p =>p.classList.remove('show'))
+        carts[x].addEventListener('click' , function(e){
+                popUps[x].classList.remove('show')
 
-      // Toggle only the clicked one
-      
-        popUps[x].classList.toggle('show')
-        
-      // Stop this click from reaching the document
-        e.stopPropagation()
-    });
 
-      // Prevent popup clicks from closing themselves
-        popUps[x].addEventListener('click', e => e.stopPropagation());
+                popUps[x].classList.toggle('show')
+
+                
+                e.stopPropagation()
+                
+        })
+        popUps[x].addEventListener('click', e =>e.stopPropagation())
+        document.addEventListener('click' , function(){
+                popUps.forEach(e => e.classList.remove('show'))
+        })
+
   }
 
-  // Click anywhere else = close all popups
-   document.addEventListener('click' , function(){
-        popUps.forEach(p => p.classList.remove('show'))
-   })
 };
 
 
