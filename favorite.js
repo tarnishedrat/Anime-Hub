@@ -7,6 +7,26 @@ const imgs = document.querySelectorAll('.img-box img')
 const textCon = document.querySelectorAll('.text-container') 
 const aniTile = document.querySelectorAll('.text-container h2') 
 const aniDesc = document.querySelectorAll('.text-container p') 
+const searchIcon = document.querySelector('nav #search-icon') 
+
+searchIcon.addEventListener('click' , function(){
+        
+        SearchContainer.style.display = 'flex'
+        searchBar.focus()
+        /* nav.style.position ='fixed'
+        nav.style.width ="100%" */
+        nav.style.zIndex ="10000"
+        window.scroll({
+                top: 801,
+                behavior: 'smooth'
+                });
+                searchBar.addEventListener('blur' , function(){
+                        SearchContainer.style.display ="none"
+                })
+       
+})
+
+
 window.onload = ()=>{
         if(localStorage.mode != null){
                 if(localStorage.mode ==="light"){
@@ -36,6 +56,7 @@ async function getNewEpisodes(){
                 const shortEnough = data.data[x].title.length <70
                 card += `
                  <div class="fcard fav">
+                 
             <div class="img-box"><img src="${data.data[tmp[x]].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
             <i class="fa-solid fa-heart"></i>
             </div>
@@ -60,7 +81,7 @@ async function getNewEpisodes(){
             </div>`
 
         }
-        favAnime.innerHTML = card
+        favAnime.innerHTML += card
         showDetails()
 }
 getNewEpisodes().then(() =>{

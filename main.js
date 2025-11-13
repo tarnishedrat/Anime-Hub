@@ -270,7 +270,10 @@ async function getNewEpisodes(){
                
             </div>`
                 popcard += `
+                
                 <div class="pop-up" >
+                <div class="pop-up-cover">
+                </div>
                 <i class="fa-solid fa-xmark"></i>
                 <div class="img-box"><img src="${data.data[x].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
             
@@ -285,6 +288,7 @@ async function getNewEpisodes(){
                 
                 </div>
                 <button id="watchbtn">Watch Now!</button>
+                
                 </div>
                 `
                
@@ -505,7 +509,7 @@ function search() {
   }
 }
 
-// trigger search on typing
+
 searchBar.addEventListener('keyup', search); 
 
       
@@ -523,31 +527,33 @@ let favAnimes;
 let on;
 const text = document.querySelectorAll('.pop-up .text')
 
-var showDetails = () => {
-        //call the elements
-  const popUps = document.querySelectorAll('.pop-up');
-  const carts = document.querySelectorAll('.anime-episodes .fcard');
-
-  popUps.forEach(pop =>pop.style.transition ='all ease 0.2s')
-  for (let x = 0; x < carts.length; x++) {
-        carts[x].addEventListener('click' , function(e){
+var showDetails = () =>{
+        const popUps = document.querySelectorAll('.pop-up')
+        
+        const carts = document.querySelectorAll('.anime-episodes .fcard')
+        console.log(popUps , carts)
+        
+        popUps.forEach(pop => pop.style.transition ='all ease 0.2s')
+        for (let x = 0; x < carts.length; x++){
+              carts[x].addEventListener('click' , function(e){
                 popUps[x].classList.remove('show')
 
 
                 popUps[x].classList.toggle('show')
-
-                
+                //this doesnt let the event bubbles up till it reaches its parents and the document and the document listener fires and display goes none 
                 e.stopPropagation()
                 
-        })
-        popUps[x].addEventListener('click', e =>e.stopPropagation())
-        document.addEventListener('click' , function(){
-                popUps.forEach(e => e.classList.remove('show'))
-        })
+                })
+                //so this line means we stop it from bubbling up into its parents and then into the document and the document listener will end up firing which is closes the popup so when i click on it it doesnt close itslef
+                popUps[x].addEventListener('click' , e =>e.stopPropagation())
+                
 
-  }
-
-};
+                
+        }
+        document.addEventListener('click' , ()=>{
+                        popUps.forEach(pop => pop.classList.remove('show'))
+                })
+}
 
 
 

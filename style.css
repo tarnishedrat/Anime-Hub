@@ -126,6 +126,7 @@ nav ul a:hover{
     height: 400px;
     position: relative;
     margin-top: 72px;
+    margin-bottom: 20px;
 }
 .hero-section .img-box{
     width: 100%;
@@ -300,10 +301,9 @@ color: var(--violet);
     background: var(--violet);
 }
 #newanime{
-    position: relative;
-    left: 20px;
     margin-top: 20px;
-
+    margin-bottom: 20px;
+    white-space: nowrap;    
 }
 .anime-episodes {
     display: flex;
@@ -311,20 +311,45 @@ color: var(--violet);
     flex-wrap: wrap;
     width: 75%;
     margin: auto;
-    min-height: fit-content;
+    min-height: 100vh;
     padding: 5px;
     align-content: flex-start;
     position: relative;
+    margin-top: 20px;
 }
+.titleCon {
+  text-align: center;
+}
+
+.titleCon h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* optional */
+  padding: 0;
+  margin: 0;
+    
+}
+
+.titleCon h2::before,
+.titleCon h2::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #888;
+  margin: 0 10px;
+}
+
+
 .fav-animes{
     display: flex;
     gap: 5px;
+    justify-content: center;
     flex-wrap: wrap;
     width: 75%;
     margin: auto;
     margin-top: 82px;
     height: fit-content;
-    padding: 5px;
+
 }
 .anime-card{
     width: 280px;
@@ -420,6 +445,15 @@ color: var(--violet);
 .red{
     color: red;
 }
+.pop-up-cover{  
+    background: rgba(81, 1, 99, 0.316);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin-left: -50px;
+    
+}
 .pop-up{
     width: 800px;
     height:500px;
@@ -449,6 +483,7 @@ color: var(--violet);
     background-color: #fff;
     width: fit-content;
     border-radius: 5px;
+    z-index: 9999;
 }
 .pop-up .img-box img{
     height: 100%;
@@ -560,4 +595,11 @@ body.light-theme .fcard .img-box:hover img{
     width: 400px;
     height: 400px;
     border-radius: 10px;
+}
+.fav-animes .title{
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+
+
 }
