@@ -22,7 +22,7 @@ searchIcon.addEventListener('click' , function(){
         nav.style.width ="100%" */
         nav.style.zIndex ="10000"
         window.scroll({
-                top: 801,
+                top: 880,
                 behavior: 'smooth'
                 });
                 searchBar.addEventListener('blur' , function(){
@@ -255,6 +255,7 @@ async function getNewEpisodes(){
                 const shortEnough = data.data[x].title.length <70
                 
                 card += `
+                
                  <div class="fcard" >
             <div class="img-box"><img src="${data.data[x].images.jpg.large_image_url}" alt="..." class="fav-anime-img">
             <i class="fa-solid fa-heart HS"></i>
@@ -293,7 +294,7 @@ async function getNewEpisodes(){
                 `
                
         }
-        document.querySelector('.anime-episodes').innerHTML = card
+        document.querySelector('.anime-episodes').innerHTML += card
         document.querySelector('.anime-episodes').innerHTML += popcard
         showDetails()
 }
@@ -634,4 +635,14 @@ let body = document.body
         
 }
 })
-
+let svg = document.querySelectorAll('svg')
+console.log(svg)
+let nejma = document.querySelector('.nejma')
+console.log(nejma)
+window.addEventListener('scroll'  ,()=>{
+        
+                
+                svg.forEach(s => s.style.transform = `rotate(${window.scrollY}deg)`)
+                nejma.style.transform = `rotate(${window.scrollY}deg)`
+        
+})

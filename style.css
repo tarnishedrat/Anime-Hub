@@ -61,6 +61,7 @@ body {
   background-color: var(--black);
   overflow-x: hidden;
   overflow-y: auto;
+  position: relative;
 }
 
 
@@ -75,11 +76,13 @@ button{
   border: 1px solid var(--black);
   cursor: pointer;
   transition: 0.3s;
+ 
 }
 button:hover{
     transform: scale(1.1);
     background: linear-gradient(135deg , var(--violet) , var(--orange));
     box-shadow: 0 0 15px var(--violet);
+    letter-spacing: 1px;
 }
 h2 {
   color: var(--violet);
@@ -96,7 +99,6 @@ nav{
     position: fixed;
     z-index: 9999999;
     width: 100%;
-    
     
 }
 nav ul li{
@@ -118,7 +120,6 @@ nav ul{
 nav ul a:hover{
     border-bottom: var(--violet) 2px solid; 
 }
-
 /*bANNER*/
 
 .hero-section{
@@ -197,6 +198,59 @@ color: var(--violet);
     overflow: visible;
     margin: 0;
     position: relative;
+
+}
+.svg-wrapper{
+    transform: translateY(20%);
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    top: 18.7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+.svg-scnd-wrapper{
+
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 40%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px;
+    align-items: center;
+}
+.svg-scnd-wrapper svg{
+    height: 50px;
+    width: 50px;
+
+}
+.svg-scnd-wrapper .shape1{
+    position: absolute;
+    left: 20px;
+}
+.svg-scnd-wrapper .shape2{
+    position: absolute;
+    right: 20px;
+}
+.container .nejma1{
+    height: 50px;
+
+    width: 50px;
+}
+.container .nejma{
+    height: 50px;
+    width: 50px;
+
+}
+.container .shape{
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 50px;
+    
 }
 .img-box #img2,#img3,#img4{
     display: none;
